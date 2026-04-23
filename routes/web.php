@@ -11,8 +11,8 @@ Route::get('/', [ArticleController::class, 'index'])
 Route::get('/articles/{article}', [ArticleController::class, 'show'])
    ->name('articles.show');
 
-Route::get('/category/{category}', [CategoryController::class, 'byCategory'])
-   ->name('categories.byCategory');
+Route::get('/category/{category:slug}', [ArticleController::class, 'byCategory'])
+    ->name('articles.byCategory');
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
@@ -23,7 +23,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
-
+//admin routes 
 Route::middleware('auth')->prefix('admin')->group(function(){
 
     Route::get('/', [AdminController::class, 'index'])
@@ -32,8 +32,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::get('/articles/create', [AdminController::class, 'create'])
         ->name('articles.create');
     
-    Route::post('articles', ArticleController::class)
-        ->except(['arcticles','store']);
+    Route::post('/articles', [ArticleController::class, 'store'])
+    ->name('articles.store');
 
     Route::get('/articles/{article}/edit', [AdminController::class, 'edit'])
         ->name('articles.edit');
@@ -44,3 +44,4 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::delete('/articles/{article}', [AdminController::class, 'destroy'])
         ->name('articles.destroy');
 });
+?>

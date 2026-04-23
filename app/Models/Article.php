@@ -2,22 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
     //
-    protected $fillable =[
-    "title",
-    "content",
-    "excerpt",
-    "status",
-    "category_id",
-    "user_id",
-    "published_at",
+    protected $fillable = [
+        "title",
+        "content",
+        "excerpt",
+        "status",
+        "category_id",
+        "user_id",
+        "published_at",
     ];
-    protected $casts =[
-     "published_at"=> "datetime",
+    protected $casts = [
+        "published_at" => "datetime",
     ];
 
     public function category()
@@ -32,6 +34,6 @@ class Article extends Model
 
     public function scopePublished($query)
     {
-        return $query->where("status","published");
+        return $query->where("status", "published");
     }
 }
