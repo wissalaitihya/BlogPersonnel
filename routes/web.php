@@ -24,7 +24,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 //admin routes 
-Route::middleware('auth')->prefix('admin')->group(function(){
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 
     Route::get('/', [AdminController::class, 'index'])
         ->name('index');
